@@ -22,9 +22,10 @@ public class InitListener implements  ServletContextListener {
 		
 		Json json = new Json();
 		ArrayList<Message> messageList = json.getMessageList();
+		int msgNum = json.getMessageNum();
 		System.out.println("***add message list:size."+messageList.size()+"***");
         context.setAttribute("msgs",messageList);
-		
+        context.setAttribute("msgNum",msgNum);
 		
 	}
 

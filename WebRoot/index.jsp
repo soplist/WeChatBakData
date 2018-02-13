@@ -14,7 +14,6 @@
     body {font-size:11px;}
   </style>
   <body>
-    <h3>Love.Knowledge tree.Revelation Theology.</h3><br>
     <!-- judge app;ication -->
     <%
     if (application != null){
@@ -27,7 +26,9 @@
     <%
     ServletContext context = this.getServletContext();
     ArrayList<Message> messageList = (ArrayList<Message>)application.getAttribute("msgs"); 
+    int msgNum = (Integer)application.getAttribute("msgNum"); 
     %>
+    <h3>Love.Knowledge tree.Revelation Theology.</h3><span style="color:red">(<%=msgNum%>)</span><br>
     <!-- judge message list -->
     <%
     if (messageList != null){

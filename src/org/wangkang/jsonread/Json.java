@@ -22,9 +22,14 @@ import net.sf.json.JSONObject;
 import org.wangkang.entity.Message;
 
 public class Json {
-	ArrayList<Message> messageList;
+	private ArrayList<Message> messageList;
+	private int messageNum;
 	
-    public ArrayList<Message> getMessageList() {
+    public int getMessageNum() {
+		return messageNum;
+	}
+
+	public ArrayList<Message> getMessageList() {
 		return messageList;
 	}
 
@@ -34,12 +39,14 @@ public class Json {
     }
     
     public void readJson(){
-    	String s = ReadFile(Json.class.getResourceAsStream("/exported_sns.json")); 
+    	//String s = ReadFile(Json.class.getResourceAsStream("/exported_sns.json")); 
+    	String s = ReadFile(Json.class.getResourceAsStream("/exported_sns_20180213.json")); 
     	//System.out.println(s);
     	//String jsonStr=URLDecoder.decode(s,"utf-8");  
     	//String str=new String(s.getBytes("GB2312"),"8859_1");
 		
     	JSONArray JsonArr = JSONArray.fromObject(s);
+    	int counter = 0;
     	for(int i=0;i<JsonArr.size();i++){
     		Message m = packageMsg();
     		JSONObject jsonObj = JsonArr.getJSONObject(i);
@@ -48,7 +55,9 @@ public class Json {
     		m.setCreateTime(TimeStamp2Date(""+jsonObj.get("timestamp")));
     		m.setContent((String)jsonObj.get("content"));
     		messageList.add(m);
+    		counter++;
     	} 
+    	messageNum = counter;
     	//Message m = packageMsg();
     	//System.out.println("***add message:"+m.getAuthorName()+"***");
     	//messageList.add(m);
