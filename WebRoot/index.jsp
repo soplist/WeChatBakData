@@ -12,6 +12,8 @@
   </head>
   <style>
     body {font-size:11px;}
+    h3 {width:300px;display:inline-table;}
+    span {display:inline-table;}
   </style>
   <body>
     <!-- judge app;ication -->

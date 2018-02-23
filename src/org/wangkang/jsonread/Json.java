@@ -40,7 +40,8 @@ public class Json {
     
     public void readJson(){
     	//String s = ReadFile(Json.class.getResourceAsStream("/exported_sns.json")); 
-    	String s = ReadFile(Json.class.getResourceAsStream("/exported_sns_20180213.json")); 
+    	//String s = ReadFile(Json.class.getResourceAsStream("/exported_sns_20180213.json")); 
+    	String s = ReadFile(Json.class.getResourceAsStream("/exported_sns_20180223.json"));
     	//System.out.println(s);
     	//String jsonStr=URLDecoder.decode(s,"utf-8");  
     	//String str=new String(s.getBytes("GB2312"),"8859_1");
