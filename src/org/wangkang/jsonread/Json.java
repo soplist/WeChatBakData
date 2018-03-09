@@ -20,9 +20,11 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.wangkang.entity.Message;
+import org.wangkang.regularExpression.RegularExpression;
 
 public class Json {
 	private ArrayList<Message> messageList;
+	private ArrayList<Message> quoteList;
 	private int messageNum;
 	
     public int getMessageNum() {
@@ -32,16 +34,22 @@ public class Json {
 	public ArrayList<Message> getMessageList() {
 		return messageList;
 	}
+	
+	public ArrayList<Message> getQuoteList() {
+		return quoteList;
+	}
 
 	public Json(){
     	messageList = new ArrayList<Message>();
+    	quoteList = new ArrayList<Message>();
     	readJson();
     }
     
     public void readJson(){
     	//String s = ReadFile(Json.class.getResourceAsStream("/exported_sns.json")); 
     	//String s = ReadFile(Json.class.getResourceAsStream("/exported_sns_20180213.json")); 
-    	String s = ReadFile(Json.class.getResourceAsStream("/exported_sns_20180223.json"));
+    	//String s = ReadFile(Json.class.getResourceAsStream("/exported_sns_20180223.json"));
+    	String s = ReadFile(Json.class.getResourceAsStream("/exported_sns_20180309.json"));
     	//System.out.println(s);
     	//String jsonStr=URLDecoder.decode(s,"utf-8");  
     	//String str=new String(s.getBytes("GB2312"),"8859_1");
@@ -57,6 +65,15 @@ public class Json {
     		m.setContent((String)jsonObj.get("content"));
     		messageList.add(m);
     		counter++;
+    		
+    		//add quotes
+    		if(RegularExpression.checkQuote((String)jsonObj.get("content"))){
+    			Message mq = new Message();
+    			mq.setAuthorName((String)jsonObj.get("authorName"));
+    			mq.setCreateTime(TimeStamp2Date(""+jsonObj.get("timestamp")));
+        		mq.setContent((String)jsonObj.get("content"));
+        		quoteList.add(mq);
+    		}
     	} 
     	messageNum = counter;
     	//Message m = packageMsg();

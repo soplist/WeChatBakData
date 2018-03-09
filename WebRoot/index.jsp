@@ -28,6 +28,7 @@
     <%
     ServletContext context = this.getServletContext();
     ArrayList<Message> messageList = (ArrayList<Message>)application.getAttribute("msgs"); 
+    ArrayList<Message> quoteList = (ArrayList<Message>)application.getAttribute("quoteList"); 
     int msgNum = (Integer)application.getAttribute("msgNum"); 
     %>
     <h3>Love.Knowledge tree.Revelation Theology.</h3><span style="color:red">(<%=msgNum%>)</span><br>
@@ -39,6 +40,11 @@
     <%
     }
     %>
+    <!-- foreach message list-->
+    <c:forEach items="<%=quoteList%>" var="m">
+    ${m.authorName}.${m.createTime}:${m.content}<br>
+    </c:forEach>
+    <hr>
     <!-- foreach message list-->
     <c:forEach items="<%=messageList%>" var="m">
     ${m.authorName}.${m.createTime}:${m.content}<br>
